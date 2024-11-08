@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Operations</title>
+</head>
+<body>
+
+<h1>Array Operations</h1>
+<input type="text" id="elementInput" placeholder="Enter element">
+<button id="addButton" onclick="addElement()">Add Element</button>
+<button id="removeButton" onclick="removeElement()">Remove Element</button>
+<button id="checkButton" onclick="checkElement()">Check Element</button>
+<button id="emptyButton" onclick="emptyArray()">Empty Array</button>
+
+<div id="result"></div>
+
+<script>
+
+    let myArray = [];
+
+    function updateResult(){
+        document.getElementById('result').innerHTML = "Array" + JSON.stringify(myArray);
+
+    }
+
+    function addElement(){
+        const element = document.getElementById("elementInput").value;
+        myArray.push(element);
+            updateResult();
+            document.getElementById("elementInput").value = ""; 
+    }
+
+    function removeElement(){
+        const element = document.getElementById("elementInput").value;
+        const index = myArray.indexOf(element);
+
+        myArray.splice(index,1);
+        updateResult();
+    }
+
+    function checkElement(){
+        const element =  document.getElementById("elementInput").value;
+        const flag = myArray.includes(element);
+
+        document.getElementById("result").innerHTML = flag ? "Present" : "Not Present";
+    }
+
+    function emptyArray(){
+        myArray = [];
+        updateResult();
+    }
+
+    // includes function for checking inclusion
+</script>
+</body>
+</html>

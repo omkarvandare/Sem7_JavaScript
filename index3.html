@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>String Operations</title>
+</head>
+<body>
+
+    <h2>String Operations</h2>
+
+    <div>
+        <label for="inputString">Enter a string:</label>
+        <input type="text" id="inputString" placeholder="Enter a string">
+        
+        <button onclick="reverseString()">Reverse String</button>
+        <pre id="reverseResult"></pre>
+        
+        <button onclick="replaceCharacters()">Replace 'a' with 'z'</button>
+        <pre id="replaceResult"></pre>
+        
+        <button onclick="checkPalindrome()">Check if Palindrome</button>
+        <pre id="palindromeResult"></pre>
+    </div>
+
+    <script>
+        function reverseString() {
+            let str = document.getElementById("inputString").value;
+            let reversedStr = str.split('').reverse().join('');
+            document.getElementById("reverseResult").innerText = reversedStr;
+        }
+
+        function replaceCharacters() {
+            let str = document.getElementById("inputString").value;
+            let replacedStr = str.replace(/a/g, 'z');
+            document.getElementById("replaceResult").innerText = replacedStr;
+        }
+
+        function checkPalindrome() {
+            let str = document.getElementById("inputString").value;
+            let reversedStr = str.split('').reverse().join('');
+            let isPalindrome = str === reversedStr ? "Yes, it's a palindrome" : "No, it's not a palindrome";
+            document.getElementById("palindromeResult").innerText = isPalindrome;
+        }
+    </script>
+
+</body>
+</html>

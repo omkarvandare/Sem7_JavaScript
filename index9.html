@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Information Form</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Student Information Form</h1>
+        <form id="studentForm">
+            <!-- Form fields remain the same -->
+            <label for="name">Name:</label>
+            <input type="text" id="name" placeholder="Enter your name" required>
+            
+            <label for="address">Address:</label>
+            <input type="text" id="address" placeholder="Enter your address" required>
+
+            <label for="city">City:</label>
+            <input type="text" id="city" placeholder="Enter your city" required>
+
+            <label for="state">State:</label>
+            <input type="text" id="state" placeholder="Enter your state" required>
+
+            <label for="gender">Gender:</label>
+            <select id="gender" required>
+                <option value="">Select your gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
+                <option value="other">Other</option>
+            </select>
+
+            <label for="mobile">Mobile Number:</label>
+            <input type="text" id="mobile" placeholder="Enter your mobile number" required>
+
+            <label for="email">Email ID:</label>
+            <input type="email" id="email" placeholder="Enter your email" required>
+
+            <div class="buttons">
+                <button type="submit">Submit</button>
+                <button type="button" id="resetBtn">Reset</button>
+            </div>
+        </form>
+
+        <div id="message"></div>
+    </div>
+
+    <script>
+        document.getElementById("studentForm").addEventListener("submit", function(event) {
+            event.preventDefault();
+
+            const name = document.getElementById("name").value.trim();
+            const address = document.getElementById("address").value.trim();
+            const city = document.getElementById("city").value.trim();
+            const state = document.getElementById("state").value.trim();
+            const gender = document.getElementById("gender").value;
+            const mobile = document.getElementById("mobile").value.trim();
+            const email = document.getElementById("email").value.trim();
+
+            const namePattern = /^[a-zA-Z\s]+$/;
+            const mobilePattern = /^[0-9]{10}$/;
+            const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+            let errorMessage = "";
+
+            if (!name) {
+                errorMessage += "Name is required.\n";
+            } else if (!namePattern.test(name)) {
+                errorMessage += "Name can only contain letters and spaces.\n";
+            }
+
+            if (!address) {
+                errorMessage += "Address is required.\n";
+            }
+
+            if (!city) {
+                errorMessage += "City is required.\n";
+            }
+
+            if (!state) {
+                errorMessage += "State is required.\n";
+            }
+
+            if (!gender) {
+                errorMessage += "Gender is required.\n";
+            }
+
+            if (!mobile) {
+                errorMessage += "Mobile Number is required.\n";
+            } else if (!mobilePattern.test(mobile)) {
+                errorMessage += "Mobile Number must be 10 digits.\n";
+            }
+
+            if (!email) {
+                errorMessage += "Email ID is required.\n";
+            } else if (!emailPattern.test(email)) {
+                errorMessage += "Email ID is not valid.\n";
+            }
+
+            if (errorMessage) {
+                alert(errorMessage);
+            } else {
+                // Save validated data to localStorage
+                localStorage.setItem("studentData", JSON.stringify({
+                    name, address, city, state, gender, mobile, email
+                }));
+
+                document.getElementById("message").innerText = `Congratulations ${name}, your information has been submitted successfully!`;
+                document.getElementById("message").style.display = "block";
+                document.getElementById("studentForm").reset();
+
+                // Redirect to display page
+                window.location.href = "display.html";
+            }
+        });
+
+        document.getElementById("resetBtn").addEventListener("click", function() {
+            document.getElementById("studentForm").reset();
+            document.getElementById("message").style.display = "none"; 
+        });
+    </script>
+</body>
+</html>

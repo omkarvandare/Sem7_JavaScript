@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplication Table - For Loop</title>
+</head>
+<body>
+
+    <h2>Multiplication Table using For Loop</h2>
+
+    <div>
+        <label for="numberFor">Enter a number:</label>
+        <input type="number" id="numberFor" placeholder="Enter a number">
+        <button onclick="generateMultiplicationTableFor()">Generate Table</button>
+        <pre id="resultFor"></pre> 
+    </div>
+
+    <script>
+        // Function to generate multiplication table using for loop
+        function generateMultiplicationTableFor() {
+            let number = document.getElementById("numberFor").value;
+            let result = "";
+            for (let i = 1; i <= 10; i++) {
+                result += `${number} x ${i} = ${number * i}\n`;
+            }
+            document.getElementById("resultFor").innerText = result;
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calculator</title>
+    <script>
+        // Function to validate positive numbers
+        function validatePositiveNumber(value) {
+            return value > 0;
+        }
+
+        // Function to calculate the area of a triangle using Heron's formula
+        function calculateTriangleArea() {
+            let sideA = parseFloat(document.getElementById("triangleSideA").value);
+            let sideB = parseFloat(document.getElementById("triangleSideB").value);
+            let sideC = parseFloat(document.getElementById("triangleSideC").value);
+
+            if (!validatePositiveNumber(sideA) || !validatePositiveNumber(sideB) || !validatePositiveNumber(sideC)) {
+                document.getElementById("triangleResult").innerText = "";
+                document.getElementById("triangleError").innerText = "All side lengths must be positive numbers.";
+                return;
+            }
+
+            let s = (sideA + sideB + sideC) / 2;
+            let area = Math.sqrt(s * (s - sideA) * (s - sideB) * (s - sideC));
+
+            if (isNaN(area)) {
+                document.getElementById("triangleResult").innerText = "";
+                document.getElementById("triangleError").innerText = "Invalid triangle dimensions.";
+            } else {
+                document.getElementById("triangleResult").innerText = "Area of Triangle: " + area.toFixed(2);
+                document.getElementById("triangleError").innerText = "";
+            }
+        }
+
+        // Function to calculate the area of a rectangle
+        function calculateRectangleArea() {
+            let length = document.getElementById("rectangleLength").value;
+            let width = document.getElementById("rectangleWidth").value;
+            if (!validatePositiveNumber(length) || !validatePositiveNumber(width)) {
+                document.getElementById("rectangleResult").innerText = "";
+                document.getElementById("rectangleError").innerText = "Length and width must be positive numbers.";
+                return;
+            }
+
+            let area = length * width;
+            document.getElementById("rectangleResult").innerText = "Area of Rectangle: " + area;
+            document.getElementById("rectangleError").innerText = "";
+        }
+
+        // Function to calculate the area of a circle
+        function calculateCircleArea() {
+            let radius = document.getElementById("circleRadius").value;
+            if (!validatePositiveNumber(radius)) {
+                document.getElementById("circleResult").innerText = "";
+                document.getElementById("circleError").innerText = "Radius must be a positive number.";
+                return;
+            }
+
+            let area = Math.PI * radius * radius;
+            document.getElementById("circleResult").innerText = "Area of Circle: " + area.toFixed(2);
+            document.getElementById("circleError").innerText = "";
+        }
+    </script>
+</head>
+<body>
+
+    <h2>Area Calculator</h2>
+
+    <!-- Triangle Area Calculator -->
+    <div>
+        <h3>Triangle Area (Heron's Formula)</h3>
+        <label for="triangleSideA">Side A:</label>
+        <input type="number" id="triangleSideA" placeholder="Enter side A">
+        <label for="triangleSideB">Side B:</label>
+        <input type="number" id="triangleSideB" placeholder="Enter side B">
+        <label for="triangleSideC">Side C:</label>
+        <input type="number" id="triangleSideC" placeholder="Enter side C">
+        <button onclick="calculateTriangleArea()">Calculate Triangle Area</button>
+        <p id="triangleResult"></p>
+        <p class="error" id="triangleError"></p>
+    </div>
+
+    <!-- Rectangle Area Calculator -->
+    <div>
+        <h3>Rectangle Area</h3>
+        <label for="rectangleLength">Length:</label>
+        <input type="number" id="rectangleLength" placeholder="Enter length">
+        <label for="rectangleWidth">Width:</label>
+        <input type="number" id="rectangleWidth" placeholder="Enter width">
+        <button onclick="calculateRectangleArea()">Calculate Rectangle Area</button>
+        <p id="rectangleResult"></p>
+        <p class="error" id="rectangleError"></p>
+    </div>
+
+    <!-- Circle Area Calculator -->
+    <div>
+        <h3>Circle Area</h3>
+        <label for="circleRadius">Radius:</label>
+        <input type="number" id="circleRadius" placeholder="Enter radius">
+        <button onclick="calculateCircleArea()">Calculate Circle Area</button>
+        <p id="circleResult"></p>
+        <p class="error" id="circleError"></p>
+    </div>
+
+</body>
+</html>

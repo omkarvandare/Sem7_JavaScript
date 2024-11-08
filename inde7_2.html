@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Array of Objects</title>
+  </head>
+  <body>
+    <h1>Array of Objects</h1>
+    <label for="arraySize">Enter the size of the Array:</label>
+    <input type="number" id="arraySize" placeholder="Size of the Array" />
+    
+    <label for="addObject">Enter the Object (JSON format):</label>
+    <input type="text" id="addObject" placeholder="Enter Object" />
+    <button onclick="addToArray()">Add</button>
+    
+    <label for="checkObject">Check if the value at index is an Array:</label>
+    <input type="number" id="checkObject" placeholder="Enter Index of the Array" />
+    <button onclick="checkObject()">Check</button>
+    
+    <h3>Results:</h3>
+    <p id="ans"></p>
+    <p id="array"></p>
+    <h3>Current Array:</h3>
+    <p id="arrayDisplay"></p>
+    
+    <button onclick="resetFields()">Reset</button>
+    
+    <script>
+      let arr = [];
+      
+      function addToArray() {
+        const arraySize = parseInt(document.getElementById("arraySize").value);
+        const element = document.getElementById("addObject").value;
+        
+        if (arr.length < arraySize) {
+          try {
+            let parsedElement = JSON.parse(element);
+            arr.push(parsedElement);
+            document.getElementById("arrayDisplay").innerText = `Array: ${JSON.stringify(arr)}`;
+            document.getElementById("ans").innerText = "";
+          } catch (error) {
+            arr.push(element);
+            document.getElementById("arrayDisplay").innerText = `Array: ${JSON.stringify(arr)}`;
+            document.getElementById("ans").innerText = "";
+          }
+        } else {
+          document.getElementById("arrayDisplay").innerText = "Array is Filled";
+        }
+      }
+      
+      function checkObject() {
+        const index = parseInt(document.getElementById("checkObject").value);
+        
+        if (index >= arr.length || index < 0) {
+          document.getElementById("array").innerText = "Index out of Bound";
+        } else {
+          const value = arr[index];
+          document.getElementById("array").innerText = Array.isArray(value)
+            ? `Value at index ${index} is an Array`
+            : `Value at index ${index} is not an Array`;
+        }
+      }
+      
+      function resetFields() {
+        document.getElementById("arraySize").value = "";
+        document.getElementById("addObject").value = "";
+        document.getElementById("checkObject").value = "";
+        document.getElementById("ans").innerText = "";
+        document.getElementById("array").innerText = "";
+        document.getElementById("arrayDisplay").innerText = "";
+        arr = [];
+      }
+    </script>
+  </body>
+</html>

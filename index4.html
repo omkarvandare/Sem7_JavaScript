@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>String Comparison</title>
+</head>
+<body>
+  <h1>String Comparison</h1>
+  <label for="string1">Enter First String:</label>
+  <input type="text" id="string1" placeholder="e.g., Hello"><br><br>
+
+  <label for="string2">Enter Second String:</label>
+  <input type="text" id="string2" placeholder="e.g., hello"><br><br>
+
+  <button onclick="strictEqualityComparison()">Strict Equality (===)</button>
+  <button onclick="localeCompareComparison()">localeCompare</button>
+  <button onclick="caseInsensitiveComparison()">Case-Insensitive Comparison</button>
+  <button onclick="characterByCharacterComparison()">Character-by-Character Comparison</button>
+
+  <h2>Results:</h2>
+  <div id="results"></div>
+
+  <script>
+    function getInputStrings() {
+      const str1 = document.getElementById("string1").value;
+      const str2 = document.getElementById("string2").value;
+      return { str1, str2 };
+    }
+
+    function displayResult(message) {
+      const resultsDiv = document.getElementById("results");
+      resultsDiv.innerHTML = `<p>${message}</p>`;
+    }
+
+    // Strict Equality Comparison
+    function strictEqualityComparison() {
+      const { str1, str2 } = getInputStrings();
+      const message = str1 === str2 
+        ? "Strict Equality: The strings are equal."
+        : "Strict Equality: The strings are not equal.";
+      displayResult(message);
+    }
+
+    // localeCompare Comparison
+    function localeCompareComparison() {
+      const { str1, str2 } = getInputStrings();
+      const localeComparison = str1.localeCompare(str2);
+      let message;
+      if (localeComparison === 0) {
+        message = "localeCompare: The strings are equal.";
+      } else if (localeComparison < 0) {
+        message = `localeCompare: "${str1}" comes before "${str2}".`;
+      } else {
+        message = `localeCompare: "${str1}" comes after "${str2}".`;
+      }
+      displayResult(message);
+    }
+
+    // Case-Insensitive Comparison
+    function caseInsensitiveComparison() {
+      const { str1, str2 } = getInputStrings();
+      const message = str1.toLowerCase() === str2.toLowerCase() 
+        ? "Case-Insensitive Comparison: The strings are equal."
+        : "Case-Insensitive Comparison: The strings are not equal.";
+      displayResult(message);
+    }
+
+    // Character-by-Character Comparison
+    function characterByCharacterComparison() {
+      const { str1, str2 } = getInputStrings();
+      if (str1.length !== str2.length) {
+        displayResult("Character-by-Character Comparison: The strings are not equal in length.");
+        return;
+      }
+
+      let areEqual = true;
+      for (let i = 0; i < str1.length; i++) {
+        if (str1[i] !== str2[i]) {
+          areEqual = false;
+          break;
+        }
+      }
+
+      const message = areEqual 
+        ? "Character-by-Character Comparison: The strings are equal."
+        : "Character-by-Character Comparison: The strings are not equal.";
+      displayResult(message);
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Display Student Information</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Submitted Student Information</h1>
+        <div id="studentInfo"></div>
+    </div>
+
+    <script>
+        // Retrieve and display student data from localStorage
+        const studentData = JSON.parse(localStorage.getItem("studentData"));
+
+        if (studentData) {
+            document.getElementById("studentInfo").innerHTML = `
+                <p><strong>Name:</strong> ${studentData.name}</p>
+                <p><strong>Address:</strong> ${studentData.address}</p>
+                <p><strong>City:</strong> ${studentData.city}</p>
+                <p><strong>State:</strong> ${studentData.state}</p>
+                <p><strong>Gender:</strong> ${studentData.gender}</p>
+                <p><strong>Mobile Number:</strong> ${studentData.mobile}</p>
+                <p><strong>Email ID:</strong> ${studentData.email}</p>
+            `;
+        } else {
+            document.getElementById("studentInfo").innerText = "No student information available.";
+        }
+    </script>
+</body>
+</html>
